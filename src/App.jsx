@@ -2,37 +2,42 @@ import { useState, useEffect } from 'react'
 import Guitar from './components/Guitar'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import Ejemplo from './components/Ejemplo'
 import { db } from './data/db.js'
 
 function App() {
-  const [auth, setAuth] = useState(true)
+  // Páginas 15–18: datos locales y estado del catálogo.
+  const [data] = useState(db)
+  const [cart, setCart] = useState([])
 
-  if (auth) {
-    console.log(auth)
-    console.log(db)
-    setAuth(false)
-  }
+  useEffect(() => {
+    console.log('Guitarras cargadas:', data)
+  }, [data])
 
-  function registrar() {
-    setAuth(true)
-    alert('Registrando usuario...')
+  // El efecto muestra el carrito después de que React actualiza el estado.
+  useEffect(() => {
+    console.log('Carrito actualizado:', cart)
+  }, [cart])
+
+  // Página 20: pasar esta función al componente hijo mediante props.
+  function addToCart(item) {
+    setCart((currentCart) => [...currentCart, item])
   }
 
   return (
     <>
       <Header />
+      <Ejemplo />
 
       <main className="container-xl mt-5">
-        <h2 onClick={registrar} className="text-center">Nuestra Colección</h2>
+        <h2 className="text-center">Nuestra Colección</h2>
 
         <div className="row mt-5">
-          {db.map((guitar) => (
+          {data.map((guitar) => (
             <Guitar
               key={guitar.id}
-              image={`/img/${guitar.image}.jpg`}
-              name={guitar.name}
-              description={guitar.description}
-              price={guitar.price}
+              guitar={guitar}
+              addToCart={addToCart}
             />
           ))}
         </div>
