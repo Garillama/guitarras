@@ -1,0 +1,88 @@
+// Catálogo de práctica: las descripciones y los precios son de ejemplo.
+// Las imágenes están en public/img y se usan como `/img/${image}.jpg`.
+export const db = [
+  {
+    id: 1,
+    name: 'Lukather',
+    image: 'guitarra_01',
+    description: 'Guitarra para explorar melodías de rock y practicar solos expresivos.',
+    price: 299,
+  },
+  {
+    id: 2,
+    name: 'SRV',
+    image: 'guitarra_02',
+    description: 'Modelo inspirado en el blues, ideal para practicar acordes y fraseos.',
+    price: 349,
+  },
+  {
+    id: 3,
+    name: 'Borland',
+    image: 'guitarra_03',
+    description: 'Una propuesta para acompañar ritmos intensos y experimentar con riffs.',
+    price: 329,
+  },
+  {
+    id: 4,
+    name: 'Vai',
+    image: 'guitarra_04',
+    description: 'Guitarra para desarrollar técnicas de solista y crear nuevas melodías.',
+    price: 399,
+  },
+  {
+    id: 5,
+    name: 'Thompson',
+    image: 'guitarra_05',
+    description: 'Una opción para practicar acompañamientos y arreglos de tus canciones favoritas.',
+    price: 279,
+  },
+  {
+    id: 6,
+    name: 'White',
+    image: 'guitarra_06',
+    description: 'Modelo para experimentar con ideas de garage rock y composiciones propias.',
+    price: 359,
+  },
+  {
+    id: 7,
+    name: 'Cobain',
+    image: 'guitarra_07',
+    description: 'Guitarra inspirada en el grunge para practicar acordes y ritmos alternativos.',
+    price: 299,
+  },
+  {
+    id: 8,
+    name: 'Dale',
+    image: 'guitarra_08',
+    description: 'Una propuesta para explorar melodías de surf rock y patrones rítmicos rápidos.',
+    price: 319,
+  },
+  {
+    id: 9,
+    name: 'Krieger',
+    image: 'guitarra_09',
+    description: 'Modelo para combinar ideas de rock clásico, blues y acompañamientos melódicos.',
+    price: 369,
+  },
+  {
+    id: 10,
+    name: 'Campbell',
+    image: 'guitarra_10',
+    description: 'Guitarra para ensayar canciones de rock y construir arreglos en grupo.',
+    price: 289,
+  },
+  {
+    id: 11,
+    name: 'Reed',
+    image: 'guitarra_11',
+    description: 'Una opción para acompañar letras y explorar composiciones de rock alternativo.',
+    price: 339,
+  },
+  {
+    id: 12,
+    name: 'Hazel',
+    image: 'guitarra_12',
+    description: 'Modelo inspirado en el funk y el rock para practicar ritmos y solos creativos.',
+    price: 379,
+  },
+]
