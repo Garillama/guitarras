@@ -1,43 +1,28 @@
-import { useState, useEffect } from 'react'
 
-// Páginas 13–14: comparar un efecto al montar con otro que depende de cuenta.
+import { useState, useEffect } from 'react';
+
 export default function Ejemplo() {
-  const [cuenta, setCuenta] = useState(0)
+  const [cuenta, setCuenta] = useState(0);
 
   useEffect(() => {
-    console.log('El componente se montó')
-  }, [])
-
-  useEffect(() => {
-    console.log('El contador cambió:', cuenta)
-  }, [cuenta])
+    console.log('El contador cambió:', cuenta);
+  }, [cuenta]);
 
   return (
-    <section className="container-xl mt-5" aria-label="Ejemplo de contador">
+    <div style={{ padding: '20px', fontFamily: 'Arial' }}>
       <h2>Contador: {cuenta}</h2>
-      <div className="d-flex gap-4">
-        <button
-          type="button"
-          className="btn btn-dark"
-          onClick={() => setCuenta((actual) => actual + 1)}
-        >
-          Aumentar
-        </button>
-        <button
-          type="button"
-          className="btn btn-dark"
-          onClick={() => setCuenta((actual) => actual - 1)}
-        >
-          Disminuir
-        </button>
-        <button
-          type="button"
-          className="btn btn-dark"
-          onClick={() => setCuenta(0)}
-        >
-          Reiniciar
-        </button>
-      </div>
-    </section>
-  )
+
+      <button onClick={() => setCuenta(cuenta + 1)}>
+        Aumentar
+      </button>
+
+      <button onClick={() => setCuenta(cuenta - 1)}>
+        Disminuir
+      </button>
+
+      <button onClick={() => setCuenta(0)}>
+        Reiniciar
+      </button>
+    </div>
+  );
 }

@@ -1,5 +1,5 @@
-// src/components/Footer.jsx
-export default function Footer() {
+
+function Footer() {
   return (
     <footer className="bg-dark mt-5 py-5">
       <div className="container-xl">
@@ -8,5 +8,7 @@ export default function Footer() {
         </p>
       </div>
     </footer>
-  )
+  );
 }
+
+export default Footer;

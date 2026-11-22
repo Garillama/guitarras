@@ -1,36 +1,115 @@
-import { useState, useEffect } from 'react'
-import Guitar from './components/Guitar'
-import Header from './components/Header'
-import Footer from './components/Footer'
-import Ejemplo from './components/Ejemplo'
-import { db } from './data/db.js'
+import { useState, useEffect } from 'react';
+import { db } from './data/db.js';
+
+import Ejemplo from './components/Ejemplo.jsx';
+import Header from './components/Header.jsx';
+import Guitar from './components/Guitar.jsx';
+import Footer from './components/Footer.jsx';
+
+function initialCart() {
+  const localStorageCart = localStorage.getItem('cart');
+
+  return localStorageCart
+    ? JSON.parse(localStorageCart)
+    : [];
+}
 
 function App() {
-  // Páginas 15–18: datos locales y estado del catálogo.
-  const [data] = useState(db)
-  const [cart, setCart] = useState([])
+  const MAX_QUANTITY = 5;
+  const MIN_QUANTITY = 1;
+  const [data] = useState(db);
+  const [cart, setCart] = useState(initialCart);
 
-  useEffect(() => {
-    console.log('Guitarras cargadas:', data)
-  }, [data])
 
-  // El efecto muestra el carrito después de que React actualiza el estado.
-  useEffect(() => {
-    console.log('Carrito actualizado:', cart)
-  }, [cart])
+// Mostrar el contenido del carrito
+useEffect(() => {
+  console.log('Carrito de compras:', cart);
+}, [cart]);
 
-  // Página 20: pasar esta función al componente hijo mediante props.
-  function addToCart(item) {
-    setCart((currentCart) => [...currentCart, item])
-  }
+useEffect(() => {
+  localStorage.setItem('cart', JSON.stringify(cart));
+}, [cart]);
+
+// Agregar productos
+function addToCart(item) {
+  setCart(prevCart => {
+    const existGuitar = prevCart.findIndex(
+      guitar => guitar.id === item.id
+    );
+
+    if (existGuitar >= 0) {
+      return prevCart.map(guitar =>
+        guitar.id === item.id &&
+        guitar.quantity < MAX_QUANTITY
+          ? { ...guitar, quantity: guitar.quantity + 1 }
+          : guitar
+      );
+    }
+
+    return [...prevCart, { ...item, quantity: 1 }];
+  });
+}
+
+function removeFromCart(id) {
+  setCart(prevCart =>
+    prevCart.filter(guitar => guitar.id !== id)
+  );
+}
+
+function increaseQuantity(id) {
+  setCart(prevCart =>
+    prevCart.map(guitar => {
+      if (
+        guitar.id === id &&
+        guitar.quantity < MAX_QUANTITY
+      ) {
+        return {
+          ...guitar,
+          quantity: guitar.quantity + 1
+        };
+      }
+
+      return guitar;
+    })
+  );
+}
+
+function decreaseQuantity(id) {
+  setCart(prevCart =>
+    prevCart.map(guitar => {
+      if (
+        guitar.id === id &&
+        guitar.quantity > MIN_QUANTITY
+      ) {
+        return {
+          ...guitar,
+          quantity: guitar.quantity - 1
+        };
+      }
+
+      return guitar;
+    })
+  );
+}
+
+function clearCart() {
+  setCart([]);
+}
 
   return (
     <>
-      <Header />
-      <Ejemplo />
+      <Header
+        cart={cart}
+        removeFromCart={removeFromCart}
+        increaseQuantity={increaseQuantity}
+        decreaseQuantity={decreaseQuantity}
+        clearCart={clearCart}
+      />
 
       <main className="container-xl mt-5">
-        <h2 className="text-center">Nuestra Colección</h2>
+        <h2 className="text-center">
+          Nuestra Colección
+        </h2>
 
         <div className="row mt-5">
           {data.map((guitar) => (
@@ -41,11 +120,14 @@ function App() {
             />
           ))}
         </div>
+
+        <Ejemplo />
       </main>
 
       <Footer />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
+

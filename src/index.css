@@ -9,8 +9,6 @@
 
 .carrito {
   background-color: transparent;
-
-  
   border: none;
   max-width: 2rem;
   position: relative;
@@ -756,13 +754,9 @@ button:not(:disabled),
   }
 }
 .header {
-  background-image: 
-    linear-gradient(
-      to right, 
-      rgba(0, 0, 0, 0.7), 
-      rgba(0, 0, 0, 0.7)
-    ), 
-    url("/img/header.jpg");
+  /* Ajuste de compatibilidad con Vite: los archivos de public/ se sirven desde "/",
+     por eso la ruta es "/img/header.jpg" (el ZIP traía "../img/header.jpg" y "../public/img/header.jpg"). */
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("/img/header.jpg");
   background-position: 50%;
   background-size: cover;
   position: relative;
